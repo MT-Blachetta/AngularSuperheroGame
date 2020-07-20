@@ -1,0 +1,35 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "lastname": "Hirschauer",
+      "firstname": "Manuel",
+      "email": "manuel.hirschauer@valtech-mobility.com",
+      "password": "$2a$10$LVfsB3up9uM/whRGTeIZ6O860tiWKZR0AJizdwBGDnP/sp45fWWZW",
+      "location": "ZMU",
+      "image": "http://localhost:3000/images/manuel.jpg",
+      "history": [
+        1
+      ],
+      "points": 0,
+      "badges": []
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Spülmaschine ausräumen",
+      "location": "ZMU",
+      "dueDate": "1519129755973",
+      "creator": 1
+    }
+  ],
+  "taskShortcuts": [
+    {
+      "id": 1,
+      "title": "Spülmaschine ausräumen",
+      "location": "ZMU",
+      "dueDate": "now"
+    }
+  ]
+}
