@@ -18,7 +18,7 @@
   "tasks": [
     {
       "id": 1,
-      "title": "Spülmaschine ausräumen",
+      "taskName": "Spülmaschine ausräumen",
       "location": "ZMU",
       "dueDate": "1519129755973",
       "creator": 1
