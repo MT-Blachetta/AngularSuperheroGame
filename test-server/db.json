@@ -1,35 +1,89 @@
 {
   "users": [
     {
-      "id": 1,
-      "lastname": "Hirschauer",
-      "firstname": "Manuel",
-      "email": "manuel.hirschauer@valtech-mobility.com",
-      "password": "$2a$10$LVfsB3up9uM/whRGTeIZ6O860tiWKZR0AJizdwBGDnP/sp45fWWZW",
-      "location": "ZMU",
-      "image": "http://localhost:3000/images/manuel.jpg",
-      "history": [
-        1
-      ],
-      "points": 0,
-      "badges": []
+      "id": "manuel.hirschauer",
+      "name": "Manuel Hirschauer",
+      "photoUrl": "manuel.hirschauer.jpg",
+      "city": "münchen",
+      "country": "DE",
+      "text": "Consultant",
+      "contact": {
+        "telephoneNumber": "",
+        "mobile": "+491726263541",
+        "email": "manuel.hirschauer@valtech.com"
+      },
+      "isLocked": false,
+      "organisation": "mobility",
+      "email": "manuel.hirschauer@valtech.com",
+      "password": "$2a$10$nC8d1Cd0Q6aTGPzatIPQ4.IU1OVrEfVoLbesc6EurvV5nqay8L0O."
+    },
+    {
+      "id": "fmuenchschwander",
+      "name": "Fabio Münchschwander",
+      "photoUrl": "fmuenchschwander.jpg",
+      "city": "münchen",
+      "country": "DE",
+      "text": "Consultant",
+      "contact": {
+        "telephoneNumber": "+4917672522682",
+        "mobile": "+491712983886",
+        "email": "fmuenchschwander@valtech.com"
+      },
+      "isLocked": false,
+      "organisation": "mobility",
+      "email": "fmuenchschwander@valtech.com",
+      "password": "$2a$10$nC8d1Cd0Q6aTGPzatIPQ4.IU1OVrEfVoLbesc6EurvV5nqay8L0O."
+    },
+    {
+      "id": "matthias.busch",
+      "name": "Matthias Busch",
+      "photoUrl": "matthias.busch.jpg",
+      "city": "frankfurt",
+      "country": "DE",
+      "text": "Consultant",
+      "contact": {
+        "telephoneNumber": "",
+        "mobile": "+4916097900209",
+        "email": "matthias.busch@valtech.com"
+      },
+      "isLocked": false,
+      "organisation": "mobility",
+      "email": "matthias.busch@valtech.com",
+      "password": "$2a$10$nC8d1Cd0Q6aTGPzatIPQ4.IU1OVrEfVoLbesc6EurvV5nqay8L0O."
     }
   ],
-  "tasks": [
+  "tags": [
     {
       "id": 1,
-      "taskName": "Spülmaschine ausräumen",
-      "location": "ZMU",
-      "dueDate": "1519129755973",
-      "creator": 1
-    }
-  ],
-  "taskShortcuts": [
+      "tagName": "Html"
+    },
     {
-      "id": 1,
-      "title": "Spülmaschine ausräumen",
-      "location": "ZMU",
-      "dueDate": "now"
+      "id": 2,
+      "tagName": "CSS"
+    },
+    {
+      "id": 3,
+      "tagName": "Scss"
+    },
+    {
+      "id": 4,
+      "tagName": "React"
+    },
+    {
+      "id": 5,
+      "tagName": "React Native"
+    },
+    {
+      "id": 6,
+      "tagName": "Angular"
+    },
+    {
+      "id": 7,
+      "tagName": "Json-Server"
+    },
+    {
+      "tagName": "Gauge",
+      "id": 8
     }
   ]
 }
