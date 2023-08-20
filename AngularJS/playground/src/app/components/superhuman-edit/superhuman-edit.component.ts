@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
 import {Superhuman} from "../../interfaces/superhuman";
-import {ActivatedRoute} from "@angular/router";
+//import {ActivatedRoute} from "@angular/router";
 import {SuperhumanService} from "../../services/superhuman.service";
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 //import {}
 //import { FormsModule } from '@angular/forms';
 
@@ -16,6 +17,8 @@ export class SuperhumanEditComponent {
 
   powerTypes = ['WARRIOR', 'WITCH', 'HEALER'];
   heroTypes = ["HERO","ANTI_HERO","NEUTRAL"];
+
+  edit_id: number = 0;
 
   submitted: boolean = false;
   sup: Superhuman = {
@@ -43,24 +46,26 @@ export class SuperhumanEditComponent {
       maxUses: 0
     } 
   };
-  supForm: FormGroup;
+  updateForm: FormGroup;
 
-  constructor(private router: ActivatedRoute, private supService: SuperhumanService, fb: FormBuilder) {
-    let id: number = Number(this.router.snapshot.paramMap.get('id'));
+  constructor(private router: Router, private supService: SuperhumanService, fb: FormBuilder) {
+    
+
+    this.sup = supService.getById(this.edit_id);
     //this.sup = supService.getById(id);
     
-    this.supForm = fb.group({
-      name: ['', Validators.required],
-      dead: [false],
-      strength: [0],
-      intelligence: [0],
-      power: [3],
-      healthMax: [0],
-      shieldMax: [0],
-      powerType: [this.powerTypes[0]],
-      heroType: [this.heroTypes[0]],
-      story: ['This is a sample story of your hero'],
-      currentDamage: [0],
+    this.updateForm = fb.group({
+      name: [this.sup.name, Validators.required],
+      dead: [this.sup.dead],
+      strength: [this.sup.strength],
+      intelligence: [this.sup.intelligence],
+      power: [this.sup.power],
+      healthMax: [this.sup.healthMax],
+      shieldMax: [this.sup.shieldMax],
+      powerType: [this.sup.powerType],
+      heroType: [this.sup.heroType],
+      story: [this.sup.story],
+      currentDamage: [this.sup.currentDamage],
     });
 
   }
@@ -69,9 +74,7 @@ export class SuperhumanEditComponent {
     if(!this.submitted){
       this.submitted = true;
     }
-    if(this.supForm.valid){
-      console.log(this.supForm.getRawValue());
-    }
+    this.router.navigate(['/list']);
     
   }
 

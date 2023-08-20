@@ -2,11 +2,27 @@
   <div *ngIf="isView">
     <h2>Name: {{selectedSuperhuman.name}}</h2>
     <br>
+    <h3>Hero-Type: {{ selectedSuperhuman.heroType }}</h3>
+    <br>
+    <h3>Power-Type: {{ selectedSuperhuman.powerType }}</h3>
+    <br>
+    <h3>Max Health: {{ selectedSuperhuman.healthMax }}</h3>
+    <br>
+    <h3>Max Shield: {{ selectedSuperhuman.shieldMax }}</h3>
+    <br>
+    <h3>power: {{ selectedSuperhuman.power }}</h3>
+    <br>
     <h3>strength: {{selectedSuperhuman.strength}}</h3>
     <br>
     <h3>intelligence: {{ selectedSuperhuman.intelligence }}</h3>
+    <br>
+    <h3>Weapon: {{ selectedSuperhuman.weapon.name }}</h3>
+    <br>
+    <button class="btn btn-outline-secondary" type="button" (click)="isView=false"> Edit </button>
   </div>
   <div *ngIf="!isView">
-    READY TO EDIT !
+    <app-sup-edit [edit_id]="selectedSuperhuman.id" ></app-sup-edit>
+    <button class="btn btn-outline-secondary" type="button" (click)="isView=true"> Cancel </button>
   </div>
+  <button class="btn btn-outline-secondary" type="button" (click)="isView=true" routerLink> Cancel </button>
 </div>
