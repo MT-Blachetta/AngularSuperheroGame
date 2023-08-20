@@ -94,16 +94,34 @@ export class SuperhumanPostComponent implements OnInit {
 
     switch(bid) {
       case "power":
+        let power: number = Number(this.supForm.get('power'));
+        power = Math.max(power-1,0);
+        this.supForm.patchValue({power: power});
         break;
       case "strength":
+        let strength: number = Number(this.supForm.get('strength'));
+        strength = Math.max(strength-1,0);
+        this.supForm.patchValue({strength: strength}); 
         break;
       case "intelligence":
+        let intelligence: number = Number(this.supForm.get('intelligence'));
+        intelligence = Math.max(intelligence-1,0);
+        this.supForm.patchValue({intelligence: intelligence});
         break;
       case "healthMax":
+        let healthMax: number = Number(this.supForm.get('healthMax'));
+        healthMax = Math.max(healthMax-1,0);
+        this.supForm.patchValue({healthMax: healthMax});        
         break;
       case "shieldMax":
+        let shieldMax: number = Number(this.supForm.get('shieldMax'));
+        shieldMax = Math.max(shieldMax-1,0);
+        this.supForm.patchValue({shieldMax: shieldMax});
         break;
       case "currentDamage":
+        let currentDamage: number = Number(this.supForm.get('power'));
+        currentDamage = Math.max(currentDamage-1,0);
+        this.supForm.patchValue({currentDamage: currentDamage});
         break;
       default:
         console.error("change of value failed");
@@ -113,19 +131,37 @@ export class SuperhumanPostComponent implements OnInit {
   }
 
   increaseValue(bid: string) {
-
+    
     switch(bid) {
       case "power":
+        let power: number = Number(this.supForm.get('power'));
+        power = power+1;
+        this.supForm.patchValue({power: power});
         break;
       case "strength":
+        let strength: number = Number(this.supForm.get('strength'));
+        strength = strength+1;
+        this.supForm.patchValue({strength: strength}); 
         break;
       case "intelligence":
+        let intelligence: number = Number(this.supForm.get('intelligence'));
+        intelligence = intelligence+1;
+        this.supForm.patchValue({intelligence: intelligence});
         break;
       case "healthMax":
+        let healthMax: number = Number(this.supForm.get('healthMax'));
+        healthMax = healthMax+1;
+        this.supForm.patchValue({healthMax: healthMax});        
         break;
       case "shieldMax":
+        let shieldMax: number = Number(this.supForm.get('shieldMax'));
+        shieldMax = shieldMax+1;
+        this.supForm.patchValue({shieldMax: shieldMax});
         break;
       case "currentDamage":
+        let currentDamage: number = Number(this.supForm.get('power'));
+        currentDamage = currentDamage+1;
+        this.supForm.patchValue({currentDamage: currentDamage});
         break;
       default:
         console.error("change of value failed");

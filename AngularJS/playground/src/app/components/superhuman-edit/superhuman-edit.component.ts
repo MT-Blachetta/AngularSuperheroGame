@@ -18,7 +18,7 @@ export class SuperhumanEditComponent {
   powerTypes = ['WARRIOR', 'WITCH', 'HEALER'];
   heroTypes = ["HERO","ANTI_HERO","NEUTRAL"];
 
-  edit_id: number = 0;
+  public edit_id: number = 0;
 
   submitted: boolean = false;
   sup: Superhuman = {
@@ -70,11 +70,13 @@ export class SuperhumanEditComponent {
 
   }
 
-  onSubmit(){ 
+  updateData(){ 
     if(!this.submitted){
       this.submitted = true;
     }
+    console.log("Edit Component: Updated Data");
     this.router.navigate(['/list']);
+    
     
   }
 
@@ -92,16 +94,34 @@ export class SuperhumanEditComponent {
 
     switch(bid) {
       case "power":
+        let power: number = Number(this.updateForm.get('power'));
+        power = Math.max(power-1,0);
+        this.updateForm.patchValue({power: power});
         break;
       case "strength":
+        let strength: number = Number(this.updateForm.get('strength'));
+        strength = Math.max(strength-1,0);
+        this.updateForm.patchValue({strength: strength}); 
         break;
       case "intelligence":
+        let intelligence: number = Number(this.updateForm.get('intelligence'));
+        intelligence = Math.max(intelligence-1,0);
+        this.updateForm.patchValue({intelligence: intelligence});
         break;
       case "healthMax":
+        let healthMax: number = Number(this.updateForm.get('healthMax'));
+        healthMax = Math.max(healthMax-1,0);
+        this.updateForm.patchValue({healthMax: healthMax});        
         break;
       case "shieldMax":
+        let shieldMax: number = Number(this.updateForm.get('shieldMax'));
+        shieldMax = Math.max(shieldMax-1,0);
+        this.updateForm.patchValue({shieldMax: shieldMax});
         break;
       case "currentDamage":
+        let currentDamage: number = Number(this.updateForm.get('power'));
+        currentDamage = Math.max(currentDamage-1,0);
+        this.updateForm.patchValue({currentDamage: currentDamage});
         break;
       default:
         console.error("change of value failed");
@@ -111,19 +131,37 @@ export class SuperhumanEditComponent {
   }
 
   increaseValue(bid: string) {
-
+    
     switch(bid) {
       case "power":
+        let power: number = Number(this.updateForm.get('power'));
+        power = power+1;
+        this.updateForm.patchValue({power: power});
         break;
       case "strength":
+        let strength: number = Number(this.updateForm.get('strength'));
+        strength = strength+1;
+        this.updateForm.patchValue({strength: strength}); 
         break;
       case "intelligence":
+        let intelligence: number = Number(this.updateForm.get('intelligence'));
+        intelligence = intelligence+1;
+        this.updateForm.patchValue({intelligence: intelligence});
         break;
       case "healthMax":
+        let healthMax: number = Number(this.updateForm.get('healthMax'));
+        healthMax = healthMax+1;
+        this.updateForm.patchValue({healthMax: healthMax});        
         break;
       case "shieldMax":
+        let shieldMax: number = Number(this.updateForm.get('shieldMax'));
+        shieldMax = shieldMax+1;
+        this.updateForm.patchValue({shieldMax: shieldMax});
         break;
       case "currentDamage":
+        let currentDamage: number = Number(this.updateForm.get('power'));
+        currentDamage = currentDamage+1;
+        this.updateForm.patchValue({currentDamage: currentDamage});
         break;
       default:
         console.error("change of value failed");

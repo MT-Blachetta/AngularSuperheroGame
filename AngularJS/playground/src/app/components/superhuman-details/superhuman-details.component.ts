@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Superhuman} from "../../interfaces/superhuman";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {SuperhumanService} from "../../services/superhuman.service";
 
 @Component({
@@ -38,9 +38,14 @@ export class SuperhumanDetailsComponent {
     } 
   };
 
-  constructor(private router: ActivatedRoute, private supService: SuperhumanService) {
+  constructor(private navigator: Router, private router: ActivatedRoute, private supService: SuperhumanService) {
     let id: number = Number(this.router.snapshot.paramMap.get('id')); 
     this.selectedSuperhuman = supService.getById(id);
+  }
+
+  chooseHero(){
+    sessionStorage.setItem("userHero",this.selectedSuperhuman.id.toString());
+    //this.navigator.navigate(['']);
   }
 
 }

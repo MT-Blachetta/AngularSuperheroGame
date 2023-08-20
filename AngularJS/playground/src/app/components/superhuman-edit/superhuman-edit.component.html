@@ -1,10 +1,10 @@
   <div>
-    <h1>EDIT: {{}} </h1>
+    <h1>EDIT: {{ sup.name }} </h1>
     <form (ngSubmit)="updateData()" [formGroup]="updateForm">
         <div class="form-group">
           <label for="name">name</label>
           <input class="form-control" type="text" id="name" formControlName="name">
-          <div [hidden]="supForm.get('name')?.valid" class="alert alert-danger">
+          <div [hidden]="updateForm.get('name')?.valid" class="alert alert-danger">
             Name is required
           </div>
         </div>
@@ -33,7 +33,7 @@
                 <div class="input-group" id="power">   
                     <button class="btn btn-outline-secondary" type="button" (click)="increaseValue('power')">+</button>
                     <button class="btn btn-outline-secondary" type="button" (click)="decreaseValue('power')">-</button>       
-                    <input type="number" min="0" class="form-control text-center" [value]="supForm.get('power')" formControlName="power">                
+                    <input type="number" min="0" class="form-control text-center" [value]="updateForm.get('power')" formControlName="power">                
                   </div>
               </div>
               
@@ -42,7 +42,7 @@
                  <div class="input-group" id="strength">
                     <button class="btn btn-outline-secondary" type="button" (click)="increaseValue('strength')">+</button>
                     <button class="btn btn-outline-secondary" type="button" (click)="decreaseValue('strength')">-</button>       
-                    <input type="number" min="0" class="form-control text-center" [value]="supForm.get('strength')" formControlName="strength"> 
+                    <input type="number" min="0" class="form-control text-center" [value]="updateForm.get('strength')" formControlName="strength"> 
                 </div>
               </div>
               
@@ -51,7 +51,7 @@
                 <div class="input-group" id="healthMax">
                     <button class="btn btn-outline-secondary" type="button" (click)="increaseValue('healthMax')">+</button>
                     <button class="btn btn-outline-secondary" type="button" (click)="decreaseValue('healthMax')">-</button>       
-                    <input type="number" min="0" class="form-control text-center" [value]="supForm.get('healthMax')" formControlName="healthMax"> 
+                    <input type="number" min="0" class="form-control text-center" [value]="updateForm.get('healthMax')" formControlName="healthMax"> 
                 </div>
               </div>
             </div>
@@ -62,7 +62,7 @@
                  <div class="input-group" id="damage">
                     <button class="btn btn-outline-secondary" type="button" (click)="increaseValue('currentDamage')">+</button>
                     <button class="btn btn-outline-secondary" type="button" (click)="decreaseValue('currentDamage')">-</button>       
-                    <input type="number" min="0" class="form-control text-center" [value]="supForm.get('currentDamage')" formControlName="currentDamage"> 
+                    <input type="number" min="0" class="form-control text-center" [value]="updateForm.get('currentDamage')" formControlName="currentDamage"> 
                 </div>
               </div>
               
@@ -72,7 +72,7 @@
                 <div class="input-group" id="intelligence">
                     <button class="btn btn-outline-secondary" type="button" (click)="increaseValue('intelligence')">+</button>
                     <button class="btn btn-outline-secondary" type="button" (click)="decreaseValue('intelligence')">-</button>       
-                    <input type="number" min="0" class="form-control text-center" [value]="supForm.get('intelligence')" formControlName="intelligence"> 
+                    <input type="number" min="0" class="form-control text-center" [value]="updateForm.get('intelligence')" formControlName="intelligence"> 
                 </div>
               </div>
               
@@ -81,7 +81,7 @@
                 <div class="input-group" id="shieldMax">
                     <button class="btn btn-outline-secondary" type="button" (click)="increaseValue('shieldMax')">+</button>
                     <button class="btn btn-outline-secondary" type="button" (click)="decreaseValue('shieldMax')">-</button>       
-                    <input type="number" min="0" class="form-control text-center" [value]="supForm.get('shieldMax')" formControlName="shieldMax"> 
+                    <input type="number" min="0" class="form-control text-center" [value]="updateForm.get('shieldMax')" formControlName="shieldMax"> 
                 </div>
               </div>
             </div>
