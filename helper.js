@@ -16,7 +16,7 @@ app.post('/story', async (req, res) => {
 
   const engineId = 'stable-diffusion-xl-1024-v1-0';
   const apiHost = 'https://api.stability.ai';
-  const apiKey = "";
+  const apiKey = "f";
 
   const prompt = req.body.description;
 
