@@ -1,0 +1,92 @@
+<div>
+<form (ngSubmit)="onSubmit()" [formGroup]="supForm">
+    <div class="form-group">
+      <label for="name">name</label>
+      <input class="form-control" type="text" id="name" formControlName="name">
+      <div [hidden]="supForm.get('name')?.valid" class="alert alert-danger">
+        Name is required
+      </div>
+    </div>
+
+    <select class="form-control" formControlName="powerType">
+      <option value="WARRIOR">Warrior</option>
+      <option value="WITCH">Witch</option> 
+      <option value="HEALER">Healer</option>
+    </select>
+
+    <select class="form-control" formControlName="heroType">
+      <option value="HERO">Hero</option>
+      <option value="ANTI-HERO">Anti-Hero</option> 
+      <option value="NEUTRAL">Neutral</option>
+    </select>
+
+    <select class="form-control" formControlName="weaponId">
+      <option *ngFor="let w of weaponTypes" [value]="w.id">{{w.name}}</option>
+    </select>
+
+    <div class="container">
+
+        <div class="row">
+          <div class="col-4 col-margin">
+            <label for="power">power</label>
+            <div class="input-group" id="power">   
+                <button class="btn btn-outline-secondary" type="button" (click)="increaseValue('power')">+</button>
+                <button class="btn btn-outline-secondary" type="button" (click)="decreaseValue('power')">-</button>       
+                <input type="number" min="0" class="form-control text-center" [value]="supForm.get('power')" formControlName="power">                
+              </div>
+          </div>
+          
+          <div class="col-4 col-margin">
+            <label for="strength">strength</label>
+             <div class="input-group" id="strength">
+                <button class="btn btn-outline-secondary" type="button" (click)="increaseValue('strength')">+</button>
+                <button class="btn btn-outline-secondary" type="button" (click)="decreaseValue('strength')">-</button>       
+                <input type="number" min="0" class="form-control text-center" [value]="supForm.get('strength')" formControlName="strength"> 
+            </div>
+          </div>
+          
+          <div class="col-4 col-margin">
+            <label for="healthMax">max health</label>
+            <div class="input-group" id="healthMax">
+                <button class="btn btn-outline-secondary" type="button" (click)="increaseValue('healthMax')">+</button>
+                <button class="btn btn-outline-secondary" type="button" (click)="decreaseValue('healthMax')">-</button>       
+                <input type="number" min="0" class="form-control text-center" [value]="supForm.get('healthMax')" formControlName="healthMax"> 
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-4 col-margin">
+            <label for="damage">damage</label>
+             <div class="input-group" id="damage">
+                <button class="btn btn-outline-secondary" type="button" (click)="increaseValue('currentDamage')">+</button>
+                <button class="btn btn-outline-secondary" type="button" (click)="decreaseValue('currentDamage')">-</button>       
+                <input type="number" min="0" class="form-control text-center" [value]="supForm.get('currentDamage')" formControlName="currentDamage"> 
+            </div>
+          </div>
+          
+          
+          <div class="col-4 col-margin">
+            <label for="intelligence">intelligence</label>
+            <div class="input-group" id="intelligence">
+                <button class="btn btn-outline-secondary" type="button" (click)="increaseValue('intelligence')">+</button>
+                <button class="btn btn-outline-secondary" type="button" (click)="decreaseValue('intelligence')">-</button>       
+                <input type="number" min="0" class="form-control text-center" [value]="supForm.get('intelligence')" formControlName="intelligence"> 
+            </div>
+          </div>
+          
+          <div class="col-4 col-margin">
+            <label for="shieldMax">max defense</label>
+            <div class="input-group" id="shieldMax">
+                <button class="btn btn-outline-secondary" type="button" (click)="increaseValue('shieldMax')">+</button>
+                <button class="btn btn-outline-secondary" type="button" (click)="decreaseValue('shieldMax')">-</button>       
+                <input type="number" min="0" class="form-control text-center" [value]="supForm.get('shieldMax')" formControlName="shieldMax"> 
+            </div>
+          </div>
+        </div>
+      </div>
+      <textarea formControlName="story"></textarea>
+    <br>
+    <input type="submit" value="Save">
+  </form>
+</div>

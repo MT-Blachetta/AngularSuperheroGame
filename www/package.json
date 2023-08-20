@@ -1,0 +1,24 @@
+{
+  "name": "www",
+  "version": "1.0.0",
+  "description": "",
+  "main": "scr/index.js",
+  "scripts": {
+    "scss": "node-sass -o css/ css/",
+    "watch:scss": "onchange \"css/*.scss\" -- npm run scss",
+    "clean": "rimraf js/*.min.js*",
+    "copy": "copyfiles -f node_modules/bootstrap/dist/js/*.min.js* node_modules/@popperjs/core/dist/umd/*.min.js* js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "copyfiles": "^2.4.1",
+    "node-sass": "^9.0.0",
+    "onchange": "^7.1.0",
+    "rimraf": "^5.0.1"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.1"
+  }
+}

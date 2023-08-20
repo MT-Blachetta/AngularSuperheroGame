@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Weather App</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .form-container {
+            display: flex;
+            justify-content: space-around;
+        }
+        .valid {
+            border-color: green;
+        }
+        .invalid {
+            border-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div> <h1>Simple Weather App</h1> </div>
+    <div class="form-container">
+        <label for="Latitude">Latitude:</label>
+        <input type="text" id="Latitude" name="Latitude" oninput="validateInput(this)">
+        <label for="Longitude">Longitude</label>
+        <input type="text" id="Longitude" name="Longitude" oninput="validateInput(this)">
+        <button type="submit" id="submitBtn" disabled>Search</button>
+    </div>
+
+    <div id="location">
+    </div>
+            <div id="00:00:00+00:00"> </div>
+            <div id="01:00:00+00:00"></div>
+            <div id="02:00:00+00:00"></div>
+            <div id="03:00:00+00:00"></div>
+            <div id="04:00:00+00:00"></div>
+            <div id="05:00:00+00:00"></div>
+            <div id="06:00:00+00:00"></div>
+            <div id="07:00:00+00:00"></div>
+            <div id="08:00:00+00:00"></div>
+            <div id="09:00:00+00:00"></div>
+            <div id="10:00:00+00:00"></div>
+            <div id="11:00:00+00:00"></div>
+            <div id="12:00:00+00:00"></div>
+            <div id="13:00:00+00:00"></div>
+            <div id="14:00:00+00:00"></div>
+            <div id="15:00:00+00:00"></div>
+            <div id="16:00:00+00:00"></div>
+            <div id="17:00:00+00:00"></div>
+            <div id="18:00:00+00:00"></div>
+            <div id="19:00:00+00:00"></div>
+            <div id="20:00:00+00:00"></div>
+            <div id="21:00:00+00:00"></div>
+            <div id="22:00:00+00:00"></div>
+            <div id="23:00:00+00:00"></div>
+
+            <div id="00:00:00+02:00"></div>
+            <div id="01:00:00+02:00"></div>
+            <div id="02:00:00+02:00"></div>
+            <div id="03:00:00+02:00"></div>
+            <div id="04:00:00+02:00"></div>
+            <div id="05:00:00+02:00"></div>
+            <div id="06:00:00+02:00"></div>
+            <div id="07:00:00+02:00"></div>
+            <div id="08:00:00+02:00"></div>
+            <div id="09:00:00+02:00"></div>
+            <div id="10:00:00+02:00"></div>
+            <div id="11:00:00+02:00"></div>
+            <div id="12:00:00+02:00"></div>
+            <div id="13:00:00+02:00"></div>
+            <div id="14:00:00+02:00"></div>
+            <div id="15:00:00+02:00"></div>
+            <div id="16:00:00+02:00"></div>
+            <div id="17:00:00+02:00"></div>
+            <div id="18:00:00+02:00"></div>
+            <div id="19:00:00+02:00"></div>
+            <div id="20:00:00+02:00"></div>
+            <div id="21:00:00+02:00"></div>
+            <div id="22:00:00+02:00"></div>
+            <div id="23:00:00+02:00"></div>
+
+    </div>
+    <script>
+
+        function validateInput() {
+            var num1 = document.getElementById("Latitude");
+            var num2 = document.getElementById("Longitude");
+            var btn = document.getElementById("submitBtn");
+
+            var validNum1 = !isNaN(num1.value);
+            var validNum2 = !isNaN(num2.value);
+
+            num1.className = validNum1 ? "valid" : "invalid";
+            num2.className = validNum2 ? "valid" : "invalid";
+
+            btn.disabled = !(validNum1 && validNum2);
+        }
+
+        function dtime(hour) {
+            return hour<10 ? "0"+hour.toString()+":00" : hour.toString()+":00";
+        }
+
+        function add_results(info) {
+            const location = info.sources[0].station_name;
+            document.getElementById("location").innerHTML = "<h2>"+location+"</h2>";
+
+            var time = "";
+            for(i = 0; i < 24; i++) {
+
+                time = info.weather[i].timestamp.split("T")[1];
+                console.log(time);
+                document.getElementById(time).innerHTML = "<p> "+ dtime(i) + "  " +  info.weather[i].icon + " with " + info.weather[i].temperature + " °C </p>";
+
+            }
+
+
+        }
+
+        document.getElementById("submitBtn").addEventListener("click", function() {
+
+            var num1 = document.getElementById("Latitude");
+            var num2 = document.getElementById("Longitude");
+ 
+            if(isNaN(num1.value) || isNaN(num2.value)) {
+
+                alert("wrong number format !");
+            
+            }   else { 
+
+                var query_string = "https://api.brightsky.dev/weather?lat=" + num1.value.toString() + "&lon=" + num2.value.toString() + "&date=2023-07-28";
+                fetch(query_string).then(response => { 
+                    
+                    if(response.ok) { response.json().then(add_results); }
+                    else { alert("Request failed !"); }
+
+                     });
+
+             }
+
+        });
+
+    </script>
+</body>
+</html>

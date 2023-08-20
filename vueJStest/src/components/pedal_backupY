@@ -1,0 +1,82 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import { mainStore } from '../stores/mainStore.ts'
+import { storeToRefs } from 'pinia';
+//const props = defineProps({});
+
+const systemState = mainStore();
+const { accelerateFactor, started, batteryRounded } = storeToRefs(systemState);
+
+const isPressedGas = ref(false);
+//const unpressedGas = computed( () => !isPressedGas.value );
+const isPressedBrake = ref(false);
+//const unpressedBrake = computed( () => !isPressedBrake.value);
+
+function pressGas(){
+    console.log("gas pressed");
+    accelerateFactor.value = 1;
+    isPressedGas.value = true;
+    if(batteryRounded.value > 0) {
+        started.value = !started.value;
+    }    
+}
+
+function pressBrake(){
+    console.log("brake pressed");
+    accelerateFactor.value = -1;
+    isPressedBrake.value = true;
+}
+
+function releaseGas() {
+    console.log("released gas");
+    accelerateFactor.value = 0;
+    isPressedGas.value = false;
+}
+
+function releaseBrake() {
+    console.log("released brake")
+    accelerateFactor.value = 0;
+    isPressedBrake.value = false;
+}
+
+</script>
+
+<template>
+    <div class="container">
+    <div v-if="isPressedGas" class="pedal">
+      <img @mouseup="releaseGas" @mouseout="releaseGas" scr="../assets/pressed.png" />
+    </div>
+    <div v-else class="pedal">
+      <img @mousedown="pressGas" src="../assets/gaspedal.png" />
+    </div>
+    <div v-if="isPressedBrake" class="pedal">
+      <img @mouseup="releaseBrake" @mouseout="releaseBrake" scr="../assets/pressed.png" />
+    </div>
+    <div v-else class="pedal">
+      <img @mousedown="pressBrake" src="../assets/bremspedal.png" />
+    </div>    
+    </div>
+</template>
+
+<style scoped>
+.container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.pedal {
+    margin-right: 20px; /* adjust the margin as needed */
+    position: relative;
+    width: 154px;
+    height: 438px;
+}
+
+.pedal img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 154px;
+    height: 438px;
+}
+</style>

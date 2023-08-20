@@ -1,0 +1,6 @@
+<h2 class="text-center mt-5">All Superhumans</h2>
+<ul class="list-group text-center mt-5">
+  <li *ngFor="let sup of superhumans" class="list-group-item" routerLink="/detail/{{sup.id}}">
+    <span class="badge">{{sup.id}}</span> {{sup.name}}
+  </li>
+</ul>

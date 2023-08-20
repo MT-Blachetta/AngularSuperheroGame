@@ -1,0 +1,58 @@
+<h2>{{selectedSuperhuman.name}} Details</h2>
+<div><span>id: </span>{{selectedSuperhuman.id}}</div>
+<div>
+    <label for="hero-name">Hero name: </label>
+    <input id="hero-name" [(ngModel)]="selectedSuperhuman.name" placeholder="name">
+</div>
+
+
+selectedSuperhuman?: Superhuman;
+onSelect(sup: Superhuman): void {
+    this.selectedSuperhuman = sup;
+  }
+
+
+  --------
+
+  import { TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AppComponent } from './app.component';
+
+describe('AppComponent', () => {
+  beforeEach(() => TestBed.configureTestingModule({
+    imports: [RouterTestingModule],
+    declarations: [AppComponent]
+  }));
+
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app).toBeTruthy();
+  });
+
+  it(`should have as title 'superhuman-app'`, () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.title).toEqual('superhuman-app');
+  });
+
+  it('should render title', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.content span')?.textContent).toContain('superhuman-app app is running!');
+  });
+});
+
+-----------------
+
+<form (ngSubmit)="onSubmit()" [formGroup]="supForm">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input class="form-control" type="text" id="name" formControlName="name">
+      <div [hidden]="!submitted||name?.valid"
+           class="alert alert-danger">
+        Name is required
+      </div>
+    </div>
+  </form>

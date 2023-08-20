@@ -1,0 +1,16 @@
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+#headComponent {display: flex}
+#headComponent:first-child {width: 67%}
+#headComponent:last-child {width: 28%}
+div.cv_category { margin: auto; border: auto}
+
+#flex_test {display: flex}
+
+p {font-size: medium;
+font-family: 'Times New Roman', Times, serif;
+font-style: italic;}
+
+#mainImage { margin: auto; border-spacing: 0cm;}
+
+
