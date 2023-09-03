@@ -9,21 +9,26 @@
           </div>
         </div>
     
+        <label for="powerType"> power Type</label>
         <select class="form-control" formControlName="powerType">
           <option value="WARRIOR">Warrior</option>
           <option value="WITCH">Witch</option> 
           <option value="HEALER">Healer</option>
         </select>
     
+        <label for="heroType">hero Type</label>
         <select class="form-control" formControlName="heroType">
           <option value="HERO">Hero</option>
           <option value="ANTI-HERO">Anti-Hero</option> 
           <option value="NEUTRAL">Neutral</option>
         </select>
-    
+
+        <div *ngIf="weaponsExists">
+        <label for="weaponId"> weapon </label>
         <select class="form-control" formControlName="weaponId">
           <option *ngFor="let w of weaponTypes" [value]="w.id">{{w.name}}</option>
         </select>
+        </div>
     
         <div class="container">
     
@@ -88,7 +93,7 @@
           </div>
           <textarea formControlName="story"></textarea>
         <br>
-        <input type="submit" value="Save">
+        <input type="submit" value="Update">
       </form>
     </div>
 

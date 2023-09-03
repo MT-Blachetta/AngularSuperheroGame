@@ -10,3 +10,18 @@
     </div>
   </div>
   ts--------
+
+  this.updateForm = fb.group({
+    name: [this.formState.name, Validators.required],
+    dead: [this.formState.dead],
+    strength: [this.formState.strength],
+    intelligence: [this.formState.intelligence],
+    power: [this.formState.power],
+    healthMax: [this.formState.healthMax],
+    shieldMax: [this.formState.shieldMax],
+    powerType: [this.formState.powerType],
+    heroType: [this.formState.heroType],
+    story: [this.formState.story],
+    currentDamage: [this.formState.currentDamage],
+    weaponId: [this.heroWeapon.id]
+  });

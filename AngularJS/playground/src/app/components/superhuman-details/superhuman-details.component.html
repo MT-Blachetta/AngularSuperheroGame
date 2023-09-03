@@ -16,12 +16,12 @@
     <br>
     <h3>intelligence: {{ selectedSuperhuman.intelligence }}</h3>
     <br>
-    <h3>Weapon: {{ selectedSuperhuman.weapon.name }}</h3>
+    <h3>Weapon: {{ equippedWeapon.name }}</h3>
     <br>
     <button class="btn btn-outline-secondary" type="button" (click)="isView=false"> Edit </button>
   </div>
   <div *ngIf="!isView">
-    <app-sup-edit [edit_id]="selectedSuperhuman.id" ></app-sup-edit>
+    <app-sup-edit></app-sup-edit>
     <button class="btn btn-outline-secondary" type="button" (click)="isView=true"> Cancel </button>
   </div>
   <button class="btn btn-outline-secondary" type="button" (click)="chooseHero()" routerLink=""> Choose Hero </button>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { WeaponService } from './services/weapon.service';
 import { SuperhumanService } from './services/superhuman.service';
-//import { Weapon } from './interfaces/weapon';
+import { Weapon } from './interfaces/weapon';
 
 @Component({
   selector: 'app-root',
@@ -29,6 +29,22 @@ export class AppComponent implements OnInit {
 
   }
 
+  anyToWeapon(data: any): Weapon{
+
+    return {
+
+      id: data.id,
+      name: data.name,
+      story: data.story,
+      addedStrength: data.addedStrength,
+      addedIntelligence: data.addedIntelligence,
+      addedPower: data.addedPower,
+      addedHealth: data.addedHeal,
+      addedShield: data.number,
+      maxUses: data.maxUses
+    }
+  }
+
   ngOnInit(): void {
 
     let selectedHero = sessionStorage.getItem("userHero");
@@ -47,6 +63,8 @@ export class AppComponent implements OnInit {
     }
 
     
+
+    
     this.wS.getWeapons().subscribe(weaponList => {
     
       let weaponState = weaponList;
@@ -54,6 +72,7 @@ export class AppComponent implements OnInit {
       if(weaponState.length === 0) {
         this.wS.postWeapon(this.initWeapon).subscribe(weapon => {
           let latestWeapon: any = weapon;
+          this.wS.weapons.push(this.anyToWeapon(weapon));
           console.log("Successfully Created initial Weapon with id ",latestWeapon.id);
           // possible weaponList initialisation 
         });

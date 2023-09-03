@@ -11,6 +11,7 @@ export class SuperhumanService {
 
   superhumans: Superhuman[] = [];
   notFetched: boolean = true;
+  editID: number = 0;
 
   private baseUrl: string = "http://localhost:8015/superhuman";
 
@@ -33,4 +34,13 @@ export class SuperhumanService {
   getById(id: number): Superhuman {
     return this.superhumans.filter(sup => sup.id === id)[0];
   }
+
+  getEdited(): Superhuman{
+    return this.getById(this.editID);
+  }
+
+  updateSuperhuman(){
+    
+  }
+
 }

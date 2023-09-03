@@ -1,9 +1,12 @@
 import {Component} from '@angular/core';
-import {Superhuman} from "../../interfaces/superhuman";
+import {Superhuman, weapon} from "../../interfaces/superhuman";
 //import {ActivatedRoute} from "@angular/router";
 import {SuperhumanService} from "../../services/superhuman.service";
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+//import { Input } from '@angular/core';
+import { WeaponService } from 'src/app/services/weapon.service';
+import { Weapon } from 'src/app/interfaces/weapon';
 //import {}
 //import { FormsModule } from '@angular/forms';
 
@@ -17,8 +20,22 @@ export class SuperhumanEditComponent {
 
   powerTypes = ['WARRIOR', 'WITCH', 'HEALER'];
   heroTypes = ["HERO","ANTI_HERO","NEUTRAL"];
+  weaponsExists: boolean = false;
+  heroWeapon: Weapon = {
+    id: 1,
+    name: "none",
+    story: "none",
+    addedStrength: 0,
+    addedIntelligence: 0,
+    addedPower: 0,
+    addedHealth: 0,
+    addedShield: 0,
+    maxUses: 0
+  } 
 
-  public edit_id: number = 0;
+  weaponTypes: Weapon[] = [this.heroWeapon];
+
+  //@Input() edit_id;
 
   submitted: boolean = false;
   sup: Superhuman = {
@@ -46,26 +63,69 @@ export class SuperhumanEditComponent {
       maxUses: 0
     } 
   };
+
   updateForm: FormGroup;
 
-  constructor(private router: Router, private supService: SuperhumanService, fb: FormBuilder) {
+  formState: any = {
+    name: "default",
+    dead: false,
+    strength: 0,
+    intelligence: 0,
+    power: 0,
+    healthMax: 0,
+    shieldMax: 0,
+    powerType: 0,
+    heroType: 0,
+    story: "default Story",
+    currentDamage: 0,
+    weaponId: 1
+  };
+
+  constructor(private router: Router, private supService: SuperhumanService, private weaponSer: WeaponService, fb: FormBuilder) {
+    
+    //console.log("ID is ",this.edit_id)
+    this.sup = supService.getEdited();
+    if(this.sup.weapon !== undefined) { this.heroWeapon = this.sup.weapon; }
+
+    if(this.weaponSer.weapons.length > 0){ 
+      this.weaponTypes = this.weaponSer.weapons;
+      this.weaponsExists = true; }
+
+    //Check if weapons is empty
     
 
-    this.sup = supService.getById(this.edit_id);
     //this.sup = supService.getById(id);
+
+    this.formState = {
+
+      name: this.sup.name,
+      dead: this.sup.dead,
+      strength: Number(this.sup.strength),
+      intelligence: Number(this.sup.intelligence),
+      power: Number(this.sup.power),
+      healthMax: Number(this.sup.healthMax),
+      shieldMax: Number(this.sup.shieldMax),
+      powerType: this.sup.powerType,
+      heroType: this.sup.heroType,
+      story: this.sup.story,
+      currentDamage: Number(this.sup.currentDamage),
+      weaponId: this.heroWeapon.id
+
+    }
     
     this.updateForm = fb.group({
-      name: [this.sup.name, Validators.required],
-      dead: [this.sup.dead],
-      strength: [this.sup.strength],
-      intelligence: [this.sup.intelligence],
-      power: [this.sup.power],
-      healthMax: [this.sup.healthMax],
-      shieldMax: [this.sup.shieldMax],
-      powerType: [this.sup.powerType],
-      heroType: [this.sup.heroType],
-      story: [this.sup.story],
-      currentDamage: [this.sup.currentDamage],
+      name: [this.formState.name, Validators.required],
+      dead: [this.formState.dead],
+      strength: [this.formState.strength],
+      intelligence: [this.formState.intelligence],
+      power: [this.formState.power],
+      healthMax: [this.formState.healthMax],
+      shieldMax: [this.formState.shieldMax],
+      powerType: [this.formState.powerType],
+      heroType: [this.formState.heroType],
+      story: [this.formState.story],
+      currentDamage: [this.formState.currentDamage],
+      weaponId: [this.heroWeapon.id]
     });
 
   }
@@ -94,34 +154,28 @@ export class SuperhumanEditComponent {
 
     switch(bid) {
       case "power":
-        let power: number = Number(this.updateForm.get('power'));
-        power = Math.max(power-1,0);
-        this.updateForm.patchValue({power: power});
+        this.formState.power = Math.max(this.formState.power-1,0);
+        this.updateForm.patchValue({power: this.formState.power});
         break;
       case "strength":
-        let strength: number = Number(this.updateForm.get('strength'));
-        strength = Math.max(strength-1,0);
-        this.updateForm.patchValue({strength: strength}); 
+        this.formState.strength = Math.max(this.formState.strength-1,0);
+        this.updateForm.patchValue({strength: this.formState.strength});
         break;
       case "intelligence":
-        let intelligence: number = Number(this.updateForm.get('intelligence'));
-        intelligence = Math.max(intelligence-1,0);
-        this.updateForm.patchValue({intelligence: intelligence});
+        this.formState.intelligence = Math.max(this.formState.intelligence-1,0);
+        this.updateForm.patchValue({intelligence: this.formState.intelligence});
         break;
       case "healthMax":
-        let healthMax: number = Number(this.updateForm.get('healthMax'));
-        healthMax = Math.max(healthMax-1,0);
-        this.updateForm.patchValue({healthMax: healthMax});        
+        this.formState.healthMax = Math.max(this.formState.healthMax-1,0);
+        this.updateForm.patchValue({healthMax: this.formState.healthMax});       
         break;
       case "shieldMax":
-        let shieldMax: number = Number(this.updateForm.get('shieldMax'));
-        shieldMax = Math.max(shieldMax-1,0);
-        this.updateForm.patchValue({shieldMax: shieldMax});
+        this.formState.shieldMax = Math.max(this.formState.shieldMax-1,0);
+        this.updateForm.patchValue({shieldMax: this.formState.shieldMax});
         break;
       case "currentDamage":
-        let currentDamage: number = Number(this.updateForm.get('power'));
-        currentDamage = Math.max(currentDamage-1,0);
-        this.updateForm.patchValue({currentDamage: currentDamage});
+        this.formState.currentDamage = Math.max(this.formState.currentDamage-1,0);
+        this.updateForm.patchValue({currentDamage: this.formState.currentDamage});
         break;
       default:
         console.error("change of value failed");
@@ -131,37 +185,31 @@ export class SuperhumanEditComponent {
   }
 
   increaseValue(bid: string) {
-    
+
     switch(bid) {
       case "power":
-        let power: number = Number(this.updateForm.get('power'));
-        power = power+1;
-        this.updateForm.patchValue({power: power});
+        this.formState.power = this.formState.power+1
+        this.updateForm.patchValue({power: this.formState.power});
         break;
       case "strength":
-        let strength: number = Number(this.updateForm.get('strength'));
-        strength = strength+1;
-        this.updateForm.patchValue({strength: strength}); 
+        this.formState.strength = this.formState.strength+1
+        this.updateForm.patchValue({strength: this.formState.strength});
         break;
       case "intelligence":
-        let intelligence: number = Number(this.updateForm.get('intelligence'));
-        intelligence = intelligence+1;
-        this.updateForm.patchValue({intelligence: intelligence});
+        this.formState.intelligence = this.formState.intelligence+1
+        this.updateForm.patchValue({intelligence: this.formState.intelligence});
         break;
       case "healthMax":
-        let healthMax: number = Number(this.updateForm.get('healthMax'));
-        healthMax = healthMax+1;
-        this.updateForm.patchValue({healthMax: healthMax});        
+        this.formState.healthMax = this.formState.healthMax+1
+        this.updateForm.patchValue({healthMax: this.formState.healthMax});       
         break;
       case "shieldMax":
-        let shieldMax: number = Number(this.updateForm.get('shieldMax'));
-        shieldMax = shieldMax+1;
-        this.updateForm.patchValue({shieldMax: shieldMax});
+        this.formState.shieldMax = this.formState.shieldMax+1
+        this.updateForm.patchValue({shieldMax: this.formState.shieldMax});
         break;
       case "currentDamage":
-        let currentDamage: number = Number(this.updateForm.get('power'));
-        currentDamage = currentDamage+1;
-        this.updateForm.patchValue({currentDamage: currentDamage});
+        this.formState.currentDamage = this.formState.currentDamage+1
+        this.updateForm.patchValue({currentDamage: this.formState.currentDamage});
         break;
       default:
         console.error("change of value failed");

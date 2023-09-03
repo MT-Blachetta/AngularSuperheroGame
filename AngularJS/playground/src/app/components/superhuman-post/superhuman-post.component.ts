@@ -43,25 +43,41 @@ export class SuperhumanPostComponent implements OnInit {
       maxUses: 0
     } 
   };
+
   supForm: FormGroup;
+
+  formState: any = {
+    name: "default",
+    dead: false,
+    strength: 0,
+    intelligence: 0,
+    power: 0,
+    healthMax: 0,
+    shieldMax: 0,
+    powerType: "WARRIOR",
+    heroType: "HERO",
+    story: "default Story",
+    currentDamage: 0,
+    weaponId: 1
+  };
 
   constructor(private router: ActivatedRoute, private supService: SuperhumanService, fb: FormBuilder, private wService: WeaponService) {
     let id: number = Number(this.router.snapshot.paramMap.get('id'));
     //this.sup = supService.getById(id);
     
     this.supForm = fb.group({
-      name: ['', Validators.required],
-      dead: [false],
-      strength: [0],
-      intelligence: [0],
-      power: [3],
-      healthMax: [0],
-      shieldMax: [0],
-      powerType: [this.powerTypes[0]],
-      heroType: [this.heroTypes[0]],
-      story: ['This is a sample story of your hero'],
-      currentDamage: [0],
-      weaponId:["1"],
+      name: [this.formState.name, Validators.required],
+      dead: [this.formState.dead],
+      strength: [this.formState.strength],
+      intelligence: [this.formState.intelligence],
+      power: [this.formState.power],
+      healthMax: [this.formState.healthMax],
+      shieldMax: [this.formState.shieldMax],
+      powerType: [this.formState.powerType],
+      heroType: [this.formState.heroType],
+      story: [this.formState.story],
+      currentDamage: [this.formState.currentDamage],
+      weaponId: [this.formState.id]
     });
 
   }
@@ -90,38 +106,43 @@ export class SuperhumanPostComponent implements OnInit {
 
   }
 
+  //noGodValidator(control: FormControl): { [key: string]: boolean } | null {
+
+  //}
+
+  testValue(){
+    let check = this.supForm.get('power')?.value;
+    console.log("Type: ",typeof check);
+    console.log("Value: ",check);
+
+  }
+
   decreaseValue(bid: string) {
 
     switch(bid) {
       case "power":
-        let power: number = Number(this.supForm.get('power'));
-        power = Math.max(power-1,0);
-        this.supForm.patchValue({power: power});
+        this.formState.power = Math.max(this.formState.power-1,0);
+        this.supForm.patchValue({power: this.formState.power});
         break;
       case "strength":
-        let strength: number = Number(this.supForm.get('strength'));
-        strength = Math.max(strength-1,0);
-        this.supForm.patchValue({strength: strength}); 
+        this.formState.strength = Math.max(this.formState.strength-1,0);
+        this.supForm.patchValue({strength: this.formState.strength});
         break;
       case "intelligence":
-        let intelligence: number = Number(this.supForm.get('intelligence'));
-        intelligence = Math.max(intelligence-1,0);
-        this.supForm.patchValue({intelligence: intelligence});
+        this.formState.intelligence = Math.max(this.formState.intelligence-1,0);
+        this.supForm.patchValue({intelligence: this.formState.intelligence});
         break;
       case "healthMax":
-        let healthMax: number = Number(this.supForm.get('healthMax'));
-        healthMax = Math.max(healthMax-1,0);
-        this.supForm.patchValue({healthMax: healthMax});        
+        this.formState.healthMax = Math.max(this.formState.healthMax-1,0);
+        this.supForm.patchValue({healthMax: this.formState.healthMax});       
         break;
       case "shieldMax":
-        let shieldMax: number = Number(this.supForm.get('shieldMax'));
-        shieldMax = Math.max(shieldMax-1,0);
-        this.supForm.patchValue({shieldMax: shieldMax});
+        this.formState.shieldMax = Math.max(this.formState.shieldMax-1,0);
+        this.supForm.patchValue({shieldMax: this.formState.shieldMax});
         break;
       case "currentDamage":
-        let currentDamage: number = Number(this.supForm.get('power'));
-        currentDamage = Math.max(currentDamage-1,0);
-        this.supForm.patchValue({currentDamage: currentDamage});
+        this.formState.currentDamage = Math.max(this.formState.currentDamage-1,0);
+        this.supForm.patchValue({currentDamage: this.formState.currentDamage});
         break;
       default:
         console.error("change of value failed");
@@ -131,37 +152,31 @@ export class SuperhumanPostComponent implements OnInit {
   }
 
   increaseValue(bid: string) {
-    
+
     switch(bid) {
       case "power":
-        let power: number = Number(this.supForm.get('power'));
-        power = power+1;
-        this.supForm.patchValue({power: power});
+        this.formState.power = this.formState.power+1
+        this.supForm.patchValue({power: this.formState.power});
         break;
       case "strength":
-        let strength: number = Number(this.supForm.get('strength'));
-        strength = strength+1;
-        this.supForm.patchValue({strength: strength}); 
+        this.formState.strength = this.formState.strength+1
+        this.supForm.patchValue({strength: this.formState.strength});
         break;
       case "intelligence":
-        let intelligence: number = Number(this.supForm.get('intelligence'));
-        intelligence = intelligence+1;
-        this.supForm.patchValue({intelligence: intelligence});
+        this.formState.intelligence = this.formState.intelligence+1
+        this.supForm.patchValue({intelligence: this.formState.intelligence});
         break;
       case "healthMax":
-        let healthMax: number = Number(this.supForm.get('healthMax'));
-        healthMax = healthMax+1;
-        this.supForm.patchValue({healthMax: healthMax});        
+        this.formState.healthMax = this.formState.healthMax+1
+        this.supForm.patchValue({healthMax: this.formState.healthMax});       
         break;
       case "shieldMax":
-        let shieldMax: number = Number(this.supForm.get('shieldMax'));
-        shieldMax = shieldMax+1;
-        this.supForm.patchValue({shieldMax: shieldMax});
+        this.formState.shieldMax = this.formState.shieldMax+1
+        this.supForm.patchValue({shieldMax: this.formState.shieldMax});
         break;
       case "currentDamage":
-        let currentDamage: number = Number(this.supForm.get('power'));
-        currentDamage = currentDamage+1;
-        this.supForm.patchValue({currentDamage: currentDamage});
+        this.formState.currentDamage = this.formState.currentDamage+1
+        this.supForm.patchValue({currentDamage: this.formState.currentDamage});
         break;
       default:
         console.error("change of value failed");

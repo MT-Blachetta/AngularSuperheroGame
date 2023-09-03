@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SuperhumanPostComponent } from './components/superhuman-post/superhuman-post.component';
 import { SuperhumanDetailsComponent } from './components/superhuman-details/superhuman-details.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { CommonModule } from '@angular/common';
 
 //import { HttpClient } from '@angular/common/http';
 
@@ -32,6 +33,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
