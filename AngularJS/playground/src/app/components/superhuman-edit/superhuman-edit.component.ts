@@ -67,18 +67,12 @@ export class SuperhumanEditComponent {
   updateForm: FormGroup;
 
   formState: any = {
-    name: "default",
-    dead: false,
     strength: 0,
     intelligence: 0,
     power: 0,
     healthMax: 0,
     shieldMax: 0,
-    powerType: 0,
-    heroType: 0,
-    story: "default Story",
-    currentDamage: 0,
-    weaponId: 1
+    currentDamage: 0, 
   };
 
   constructor(private router: Router, private supService: SuperhumanService, private weaponSer: WeaponService, fb: FormBuilder) {
@@ -98,32 +92,27 @@ export class SuperhumanEditComponent {
 
     this.formState = {
 
-      name: this.sup.name,
-      dead: this.sup.dead,
       strength: Number(this.sup.strength),
       intelligence: Number(this.sup.intelligence),
       power: Number(this.sup.power),
       healthMax: Number(this.sup.healthMax),
       shieldMax: Number(this.sup.shieldMax),
-      powerType: this.sup.powerType,
-      heroType: this.sup.heroType,
-      story: this.sup.story,
       currentDamage: Number(this.sup.currentDamage),
-      weaponId: this.heroWeapon.id
+
 
     }
     
     this.updateForm = fb.group({
-      name: [this.formState.name, Validators.required],
-      dead: [this.formState.dead],
+      name: [this.sup.name, Validators.required],
+      dead: [this.sup.dead],
       strength: [this.formState.strength],
       intelligence: [this.formState.intelligence],
       power: [this.formState.power],
       healthMax: [this.formState.healthMax],
       shieldMax: [this.formState.shieldMax],
-      powerType: [this.formState.powerType],
-      heroType: [this.formState.heroType],
-      story: [this.formState.story],
+      powerType: [this.sup.powerType],
+      heroType: [this.sup.heroType],
+      story: [this.sup.story],
       currentDamage: [this.formState.currentDamage],
       weaponId: [this.heroWeapon.id]
     });
